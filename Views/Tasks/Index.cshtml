@@ -1,0 +1,100 @@
+﻿@model IEnumerable<ToDo.Models.Task>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Current Tasks: </h2>
+<form action="@Url.Action("massDelete", "Tasks")" method="post">
+    @Html.AntiForgeryToken()
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Delete
+            </th>
+            <th>
+                @Html.DisplayName("Task Title: ")
+            </th>
+            <th>
+                @Html.DisplayName("Task Body: ")
+            </th>
+            <th>
+                @Html.DisplayName("Task Owner: ")
+            </th>
+            <th>
+                @Html.DisplayName("Priority Task: ")
+            </th>
+            <th>
+                @Html.DisplayName("Task Complete: ")
+            </th>
+            <th>
+                @Html.DisplayName("Task Creation Time: ")
+            </th>
+            <th>
+                @Html.DisplayName("Task Completion Time: ")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.CheckBox("todelete", false)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskBody)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskOwner)
+                </td>
+                <td>
+                    @if (item.taskPriority == true) //priority tasks need to be displayed in a different colour
+                    {
+                        <div class="bg-info">@Html.DisplayFor(modelItem => item.taskPriority)</div>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.taskPriority)
+                    }
+                </td>
+                <td>
+                    @if (item.taskComplete == true) //completed tasks should be easily recognisable
+                    {
+                        <div class="bg-success">@Html.DisplayFor(modelItem => item.taskComplete)</div>
+                    }
+                    else
+                    {
+                        <div class="bg-danger">@Html.DisplayFor(modelItem => item.taskComplete)</div>//as should uncompleted tasks
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskCreationTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskCompletionTime)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.taskID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.taskID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.taskID })
+                </td>
+            </tr>
+        }
+    </table>
+    <!--<input type="submit" class="btn btn-danger" value="Mass Delete" /> -->
+</form>
+
+<p>
+<div class="lead" style="border-bottom:solid; border-width:thin;">
+    @using (Html.BeginForm("Create", "Tasks", FormMethod.Get))
+    {
+        <input type="submit" class="btn btn-primary" value="Create new task" />
+        <i class="fa fas fa-plus"></i>}
+
+</div>
+</p>

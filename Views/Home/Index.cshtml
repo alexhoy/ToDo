@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model IEnumerable<ToDo.Models.Task>
+<!--//the view needs to know what a task consists of in order to render them -->
+<br />
+
+@foreach (var item in Model)
+{
+    <p></p>
+
+    <div class="row lead">
+        <div class=" jumbotron container-fluid text-center bg-warning" style="border:solid;">
+          
+            <div class="col-md-3">
+                <span><h3 class="display-4"> @Html.DisplayFor(modelItem => item.taskTitle) </h3></span>
+            </div>
+
+            <div class="col-md-3">
+                <span><h3 class="text-justify"> @Html.DisplayFor(modelItem => item.taskBody) </h3></span>
+            </div>
+
+            <div class="col-md-2">
+                @using (Html.BeginForm("Details/" + item.taskID, "Tasks", FormMethod.Get))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" class="btn btn-default" value="Details" />
+                    <span><i class="fa fas fa-info"></i></span>
+
+                }
+            </div>
+
+            <div class="col-md-2">
+                @using (Html.BeginForm("Edit/" + item.taskID, "Tasks", FormMethod.Get))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" class="btn btn-default" value="Edit" />
+                    <span><i class="fa fas fa-book"></i></span>
+                }
+
+            </div>
+
+            <div class="col-md-2">
+                @using (Html.BeginForm("Delete/" + item.taskID, "Tasks", FormMethod.Get))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit"  value="Delete" class="btn btn-danger" />
+                    <span><i class="fa fas fa-trash"></i></span>
+                }
+
+            </div>
+        </div>
+    </div>
+
+}
+
+  <!--<div class="lead" style="border-bottom:solid; border-width:thin;">
+        @using (Html.BeginForm("Create", "Tasks", FormMethod.Get))
+        {
+            <input type="submit" class="btn btn-primary" value="Create new task" />
+            <i class="fa fas fa-plus"></i>}
+
+    </div> -->
+
+    <input type="button" class="btn btn-primary" value="Create new task" onclick="OpenForm()" /> <i class="fa fas fa-plus"></i>   
+
+    <div id="hiddenform" style="display:none;">
+
+        @using (Html.BeginForm("Create", "Tasks", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken();
+            
+            <ul class="form-group" style="list-style:none;">
+            <li> <input type="text", name="taskTitle" placeholder="Title..."/> </li>
+            <li><input type="text" , name="taskBody" placeholder="Body..." /> </li>
+            <li><input type="text" , name="taskOwner" placeholder="Owner..." /></li>
+            <li><label class="control-label">Priority: </label> <input type="checkbox" , name="taskPriority" /></li>
+            <li><label class="control-label">Complete: </label> <input type="checkbox" , name="taskComplete" /></li>
+            <li><input type="submit" class="btn btn-primary" value="Create Task" /></li>
+            <li><input type="button" class="btn btn-default" value="Cancel" onclick="CloseForm()"</li>
+            </ul>
+        }
+
+    </div>

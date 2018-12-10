@@ -1,0 +1,74 @@
+﻿@model ToDo.Models.Task
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Task Details: </h2>
+
+<div>
+    <h4>Task @Html.DisplayFor(model =>model.taskID)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.taskTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taskTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.taskBody)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taskBody)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.taskOwner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taskOwner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.taskPriority)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taskPriority)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.taskComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taskComplete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.taskCreationTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taskCreationTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.taskCompletionTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taskCompletionTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.taskID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
