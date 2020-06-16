@@ -40,6 +40,8 @@ namespace ToDo.Controllers
         }
 
         // GET: Tasks/Create
+        [HttpGet]
+        
         public ActionResult Create()
         {
             return View();
@@ -57,6 +59,7 @@ namespace ToDo.Controllers
             if (task.taskComplete == true) { task.taskCompletionTime = DateTime.Now; }
 
             else { task.taskCompletionTime = null; }
+            
 
             if (ModelState.IsValid)
             {

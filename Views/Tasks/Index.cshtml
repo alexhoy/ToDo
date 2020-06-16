@@ -90,11 +90,14 @@
 </form>
 
 <p>
-<div class="lead" style="border-bottom:solid; border-width:thin;">
-    @using (Html.BeginForm("Create", "Tasks", FormMethod.Get))
-    {
-        <input type="submit" class="btn btn-primary" value="Create new task" />
-        <i class="fa fas fa-plus"></i>}
+    <div class="lead" style="border-bottom:solid; border-width:thin;">
 
-</div>
+        @using (Html.BeginForm("Create", "Tasks", FormMethod.Get))
+
+        {
+            @Html.AntiForgeryToken()
+            <input type="submit" class="btn btn-primary" value="Create new task" />
+            <i class="fa fas fa-plus"></i>}
+
+    </div>
 </p>
